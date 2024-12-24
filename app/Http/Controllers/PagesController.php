@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\AllUser;
 
 class PagesController extends Controller
 {
@@ -301,7 +302,8 @@ class PagesController extends Controller
 
     public function layoutsUserCard1()
     {
-        return view('pages/layouts-user-card-1');
+        $nhanvien = AllUser::with(['chucvu', 'phongban'])->get();
+        return view('pages/layouts-user-card-1', compact('nhanvien'));
     }
 
     public function layoutsUserCard2()
