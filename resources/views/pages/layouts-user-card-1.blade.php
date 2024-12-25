@@ -151,22 +151,22 @@
                     <h3 class="pt-3 text-lg font-medium text-slate-700 dark:text-navy-100">
                         {{$nv->hoten}}
                     </h3>
-                    <p class="text-xs+">Chức vụ:{{$nv->chucvu->tenchucvu}}</p>
-                    <p class="text-xs+">Phòng ban:{{$nv->phongban->tenphongban}}</p>
+                    <p class="text-xs+">Email:{{$nv->email}}</p>
+                    <p class="text-xs+">Dia chi: {{$nv->diachi}}</p>
                     <p class="text-xs+">So dien thoai:0{{$nv->sodienthoai}}</p>
                     <div class="inline-space mt-3 flex grow flex-wrap items-start">
-                        <a href="#"
+                    <div>Chức vụ:</div>
+                        <div 
                             class="tag rounded-full bg-success/10 text-success hover:bg-success/20 focus:bg-success/20 active:bg-success/25">
-                            PHP
-                        </a>
-                        <a href="#"
+                            {{$nv->chucvu->tenchucvu}}
+                        </div>
+                        <div> Phòng ban:
+                        <div
                             class="tag rounded-full bg-success/10 text-success hover:bg-success/20 focus:bg-success/20 active:bg-success/25">
-                            Nodejs
-                        </a>
-                        <a href="#"
-                            class="tag rounded-full bg-success/10 text-success hover:bg-success/20 focus:bg-success/20 active:bg-success/25">
-                            ReactJS
-                        </a>
+                            
+                            {{$nv->phongban->tenphongban}}
+                        </div>
+                        </div>
                     </div>
                     <div class="mt-6 grid w-full grid-cols-2 gap-2">
                         <button

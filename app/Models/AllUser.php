@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AllUser extends Model
 {
     protected $table = "nhanvien"; // Đặt tên bảng
-    protected $fillable = ['hoten', 'id_phongban', 'id_chucvu', 'email', 'sodienthoai', 'diachi', 'id_quyenhan', 'avatar'];
+    protected $fillable = ['id_nhanvien','hoten', 'id_phongban', 'id_chucvu', 'email', 'sodienthoai', 'diachi', 'id_quyenhan', 'avatar'];
     
     use HasFactory;
 
@@ -22,5 +22,9 @@ class AllUser extends Model
     public function phongban()
     {
         return $this->belongsTo(PhongBan::class, 'id_phongban','id_phongban'); 
+    }
+    public function luong()
+    {
+        return $this->hasOne(SalaryCaculation::class, 'id_nhanvien', 'id_nhanvien');
     }
 }

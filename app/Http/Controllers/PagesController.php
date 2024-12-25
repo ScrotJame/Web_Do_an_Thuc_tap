@@ -150,6 +150,12 @@ class PagesController extends Controller
         return view('pages/components-table-advanced');
     }
 
+    public function componentsTableSalary()
+    {
+        $caculator = AllUser::with('luong')->get();
+        dd($caculator->first()->luong); // Debug thông tin
+        return view('pages/components-table-salary', compact('caculator'));
+    }
     public function componentsTableGridjs()
     {
         return view('pages/components-table-gridjs');

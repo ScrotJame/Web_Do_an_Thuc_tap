@@ -94,7 +94,7 @@
             </div>
             <div class="col-span-12 lg:col-span-4">
                 <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-2">
-                    <div class="rounded-lg bg-slate-150 p-4 dark:bg-navy-700">
+                    <a href="/components/table-salary" class="rounded-lg bg-slate-150 p-4 dark:bg-navy-700">
                         <div class="flex justify-between space-x-1">
                             <p class="text-xl font-semibold text-slate-700 dark:text-navy-100">
                                 $67.6k
@@ -106,7 +106,7 @@
                             </svg>
                         </div>
                         <p class="mt-1 text-xs+">Income</p>
-                    </div>
+                    </a>
                     <div class="rounded-lg bg-slate-150 p-4 dark:bg-navy-700">
                         <div class="flex justify-between">
                             <p class="text-xl font-semibold text-slate-700 dark:text-navy-100">
@@ -160,7 +160,7 @@
                         </div>
                         <p class="mt-1 text-xs+">Products</p>
                     </div>
-                    <div class="rounded-lg bg-slate-150 p-4 dark:bg-navy-700">
+                    <a href="/layouts/user-card-1" class="rounded-lg bg-slate-150 p-4 dark:bg-navy-700">
                         <div class="flex justify-between">
                             <p class="text-xl font-semibold text-slate-700 dark:text-navy-100">
                                 8.8k
@@ -172,7 +172,7 @@
                             </svg>
                         </div>
                         <p class="mt-1 text-xs+">Customers</p>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="card col-span-12 lg:col-span-8">

@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PhongBan extends Model
 {
-    protected $table = 'phongban'; // Đặt tên bảng nếu cần
-    protected $fillable = ['tenphongban']; // Ví dụ với trường 'ten_chucvu'
+    protected $table = 'phongban'; 
+    protected $fillable = ['tenphongban']; 
 
     public function nhanviens()
     {

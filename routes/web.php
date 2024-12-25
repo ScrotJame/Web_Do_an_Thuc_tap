@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/components/treeview', [PagesController::class, 'componentsTreeview'])->name('components/treeview');
     Route::get('/components/table', [PagesController::class, 'componentsTable'])->name('components/table');
     Route::get('/components/table-advanced', [PagesController::class, 'componentsTableAdvanced'])->name('components/table-advanced');
+    Route::get('/components/table-salary', [PagesController::class, 'componentsTableSalary'])->name('components/salary');
     Route::get('/components/table-gridjs', [PagesController::class, 'componentsTableGridjs'])->name('components/gridjs');
     Route::get('/components/apexchart', [PagesController::class, 'componentsApexchart'])->name('components/apexchart');
     Route::get('/components/carousel', [PagesController::class, 'componentsCarousel'])->name('components/carousel');

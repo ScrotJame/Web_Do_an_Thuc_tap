@@ -202,7 +202,8 @@
                 </div>
                 <div>
                     <div x-data="{
-                        products: [{
+                        products:
+                        [   {
                                 id: 59,
                                 title: 'Spring and summershoes',
                                 price: 20,
