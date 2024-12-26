@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\AllUser;
+use App\Models\SalaryCaculation;
 
 class PagesController extends Controller
 {
@@ -152,9 +153,20 @@ class PagesController extends Controller
 
     public function componentsTableSalary()
     {
-        $caculator = AllUser::with('luong')->get();
-        dd($caculator->first()->luong); // Debug thông tin
-        return view('pages/components-table-salary', compact('caculator'));
+        $salaries = SalaryCaculation::with('nhanvien')->get();
+        //dd($salaries->toArray());
+        $salaryData = $salaries->map(function ($salary) {
+            return [
+                'id' => $salary->nhanvien->id_nhanvien,
+                'title' => $salary->nhanvien->hoten,
+                'price' => $salary->luongcoban,
+                'quantity' => 1,
+                'total' => $salary->luongnhan,
+                'discountPercentage' => 0,
+                'discountedPrice' => $salary->luongnhan,
+            ];
+        });
+        return view('pages/components-table-salary', ['salaryData' => $salaryData]);
     }
     public function componentsTableGridjs()
     {
@@ -308,7 +320,7 @@ class PagesController extends Controller
 
     public function layoutsUserCard1()
     {
-        $nhanvien = AllUser::with(['chucvu', 'phongban'])->get();
+      $nhanvien = AllUser::with(['chucvu', 'phongban'])->get();
         return view('pages/layouts-user-card-1', compact('nhanvien'));
     }
 

@@ -20,13 +20,12 @@
             </ul>
         </div>
         <div class="grid grid-cols-1 gap-4 sm:gap-5 lg:gap-6">
-            
 
             <!-- Simple Example -->
             <div class="card pb-4">
                 <div class="my-3 flex h-8 items-center justify-between px-4 sm:px-5">
                     <h2 class="font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100 lg:text-base">
-                        Simple Exapmle
+                        Table Salary
                     </h2>
                     <div x-data="usePopper({ placement: 'bottom-end', offset: 4 })" @click.outside="if(isShowPopper) isShowPopper = false"
                         class="inline-flex">
@@ -70,38 +69,37 @@
                     </div>
                 </div>
                 <div>
-                <div x-data="{
-            caculator: @json($caculator->map(function ($rl) {
-                return [
-                    'id' => $rl->id,
-                    'name' => $rl->name,
-                    'basic_salary' => $rl->salary->luongcoban ?? 0,
-                    'allowance' => $rl->salary->phucap ?? 0,
-                    'bonus' => $rl->salary->thuong ?? 0,
-                    'deduction' => $rl->salary->khautru ?? 0,
-                    'salary_month' => $rl->salary->thangtinhluong ?? ''
-                ];
-            })),
-            table: null
-        }" x-init="table = new Gridjs.Grid({
-            columns: ['ID', 'Name', 'Basic Salary', 'Allowance', 'Bonus', 'Deduction', 'Salary Month'],
-            data: caculator.map(employee => [
-                employee.id,
-                employee.name,
-                employee.basic_salary,
-                employee.allowance,
-                employee.bonus,
-                employee.deduction,
-                employee.salary_month
-            ]),
-            sort: true,
-            search: true
-        }).render($root);">
-            </div>
-
+                @foreach($salaryData as $salary)
+            {
+                id: {{ $salary['id'] }},
+                title: '{{ $salary['title'] }}',
+                price: {{ $salary['price'] }},
+                quantity: {{ $salary['quantity'] }},
+                total: {{ $salary['total'] }},
+                discountPercentage: {{ $salary['discountPercentage'] }},
+                discountedPrice: {{ $salary['discountedPrice'] }},
+            },
+        @endforeach
+        <div x-data="{
+    products: @json($salaryData),
+    table: null
+}" x-init="table = new Gridjs.Grid({
+    columns: ['ID', 'Name', 'Basic Salary', 'Quantity', 'Total', 'Discount Percentage', 'Discounted Price'],
+    data: products,
+    sort: true,
+    search: true
+}).render($root);">
+    <div id="employee-table"></div>
+</div>
                 </div>
-            </div>
+                
+                
 
+
+            </div>
         </div>
     </main>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
 </x-app-layout>

@@ -25,6 +25,6 @@ class AllUser extends Model
     }
     public function luong()
     {
-        return $this->hasOne(SalaryCaculation::class, 'id_nhanvien', 'id_nhanvien');
+        return $this->hasOne(SalaryCaculation::class, 'id_nhanvien');
     }
 }
