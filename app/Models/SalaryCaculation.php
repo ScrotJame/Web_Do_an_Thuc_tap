@@ -24,4 +24,8 @@ class SalaryCaculation extends Model
     {
         return $this->belongsTo(AllUser::class, 'id_nhanvien', 'id_nhanvien');
     }
+    public function _trangthai()
+    {
+        return $this->belongsTo(Trangthai::class,'id_trangthai', 'id_trangthai');
+    }
 }

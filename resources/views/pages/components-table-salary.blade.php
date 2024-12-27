@@ -6,18 +6,7 @@
             </h2>
             <div class="hidden h-full py-1 sm:flex">
                 <div class="h-full w-px bg-slate-300 dark:bg-navy-600"></div>
-            </div>
-            <ul class="hidden flex-wrap items-center space-x-2 sm:flex">
-                <li class="flex items-center space-x-2">
-                    <a class="text-primary transition-colors hover:text-primary-focus dark:text-accent-light dark:hover:text-accent"
-                        href="#">Components</a>
-                    <svg x-ignore xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </li>
-                <li>Grid Table</li>
-            </ul>
+            </div>            
         </div>
         <div class="grid grid-cols-1 gap-4 sm:gap-5 lg:gap-6">
 
@@ -69,28 +58,89 @@
                     </div>
                 </div>
                 <div>
-                @foreach($salaryData as $salary)
-            {
-                id: {{ $salary['id'] }},
-                title: '{{ $salary['title'] }}',
-                price: {{ $salary['price'] }},
-                quantity: {{ $salary['quantity'] }},
-                total: {{ $salary['total'] }},
-                discountPercentage: {{ $salary['discountPercentage'] }},
-                discountedPrice: {{ $salary['discountedPrice'] }},
-            },
-        @endforeach
+                <style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+    }
+
+    table thead th {
+        background-color: #4CAF50; /* Màu nền tiêu đề */
+        color: white;
+        padding: 12px;
+    }
+
+    table th, table td {
+        border: 1px solid #ddd; /* Đường viền các ô */
+        padding: 8px;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f2f2f2; /* Màu nền cho hàng chẵn */
+    }
+
+    table tr:hover {
+        background-color: #ddd; /* Hiệu ứng hover */
+    }
+
+    table td {
+        vertical-align: top; /* Canh giữa theo chiều dọc */
+    }
+
+    table caption {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+</style>
+
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ho va ten</th>
+                            <th>Luong co ban</th>
+                            <th>Phu cap</th>
+                            <th>Thuong</th>
+                            <th>Khau tru</th>
+                            <th>Luong nhan</th>
+                            <th>Trang thai</th>
+                        </tr>
+                        @foreach($salaryData as $salary)
+                        <tr>
+                        
+                            <td> {{ $salary['id'] }}</td>
+                            <td>   {{ $salary['title'] }}</td>
+                            <td>{{ $salary['price'] }}</td>
+                            <td>{{ $salary['bonus'] }}</td>
+                            <td>{{ $salary['total'] }}</td>
+                            <td>{{ $salary['discountPercentage'] }}</td>
+                            <td> {{ $salary['discountedPrice'] }}</td>    
+                            <td>{{$salary['trangthai']}}</td>        
+                        </tr>
+                        @endforeach
+                    </table>
         <div x-data="{
-    products: @json($salaryData),
+    products: [
+        @foreach($salaryData as $salary)
+        {
+            id: {{ $salary['id'] }},
+            title: '{{ $salary['title'] }}',
+            price: {{ $salary['price'] }},
+            quantity: {{ $salary['bonus'] }},
+            total: {{ $salary['total'] }},
+            discountPercentage: {{ $salary['discountPercentage'] }},
+            discountedPrice: {{ $salary['discountedPrice'] }},
+        },
+        @endforeach
+    ],
     table: null
-}" x-init="table = new Gridjs.Grid({
-    columns: ['ID', 'Name', 'Basic Salary', 'Quantity', 'Total', 'Discount Percentage', 'Discounted Price'],
-    data: products,
-    sort: true,
-    search: true
-}).render($root);">
-    <div id="employee-table"></div>
+}" 
+x-init="table = new Gridjs.Grid({ data: products, sort: true, search: true }).render($root);">
 </div>
+
                 </div>
                 
                 

@@ -153,17 +153,18 @@ class PagesController extends Controller
 
     public function componentsTableSalary()
     {
-        $salaries = SalaryCaculation::with('nhanvien')->get();
+        $salaries = SalaryCaculation::with(['nhanvien','_trangthai'])->get();
         //dd($salaries->toArray());
         $salaryData = $salaries->map(function ($salary) {
             return [
                 'id' => $salary->nhanvien->id_nhanvien,
                 'title' => $salary->nhanvien->hoten,
                 'price' => $salary->luongcoban,
-                'quantity' => 1,
+                'bonus' => $salary->thuong,
                 'total' => $salary->luongnhan,
-                'discountPercentage' => 0,
+                'discountPercentage' => $salary->khautru,
                 'discountedPrice' => $salary->luongnhan,
+                'trangthai' => $salary->_trangthai->tentrangthai,
             ];
         });
         return view('pages/components-table-salary', ['salaryData' => $salaryData]);
@@ -203,6 +204,10 @@ class PagesController extends Controller
         return view('pages/components-extension-monochrome');
     }
 
+    public function formsLayoutInsertSalary()
+    {
+        return view('pages/forms-layout-insert-salary');
+    }
     public function formsLayoutV1()
     {
         return view('pages/forms-layout-v1');
