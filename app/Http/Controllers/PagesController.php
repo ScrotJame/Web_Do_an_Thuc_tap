@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 use App\Models\AllUser;
 use App\Models\SalaryCaculation;
 
@@ -203,11 +204,79 @@ class PagesController extends Controller
     {
         return view('pages/components-extension-monochrome');
     }
-
-    public function formsLayoutInsertSalary()
+    public function showInsertSalaryForm(Request $request)
     {
-        return view('pages/forms-layout-insert-salary');
+    // Lấy dữ liệu từ request
+    $idNhanVien = $request->input('id_nhanvien');
+    $luongcoban = $request->input('luongcoban');
+    $phucap = $request->input('phucap');
+    $thuong = $request->input('thuong');
+    $khautru = $request->input('khautru');
+    $idNhanVien = $request->query('id_nhanvien');
+    $nhanVien = null;
+    $luongcoban = $phucap = $thuong = $khautru = 0;
+
+    // Trả về view forms-layout-insert-salary.blade.php với dữ liệu
+    return view('pages/forms-layout-insert-salary', compact(
+        'idNhanVien', 'luongcoban', 'phucap', 'thuong', 'khautru'
+    ));
     }
+    
+    public function formsLayoutInsertSalary(Request $request)
+    {
+        $nhanVien = null;
+        $luongData = null;
+    
+        // Kiểm tra nếu request là GET
+        if ($request->isMethod('get') && $request->has('id_nhanvien')) {
+            $idNhanVien = $request->query('id_nhanvien');
+            $nhanVien = SalaryCaculation::with('nhanvien')->where('id_nhanvien', $idNhanVien)->first();
+        }
+    
+        // Kiểm tra nếu request là POST
+        if ($request->isMethod('post')) {
+            // Lấy thông tin từ form
+            $idNhanVien = $request->input('id_nhanvien');
+            $luongcoban = $request->input('luongcoban');
+            $phucap = $request->input('phucap');
+            $thuong = $request->input('thuong');
+            $khautru = $request->input('khautru');
+    
+            if ($idNhanVien) {
+                // Tìm thông tin lương của nhân viên
+                $luongData = SalaryCaculation::where('id_nhanvien', $idNhanVien)->first();
+    
+                // Nếu không có dữ liệu lương, tạo mới
+                if (!$luongData) {
+                    $luongData = new SalaryCaculation();
+                    $luongData->id_nhanvien = $idNhanVien;
+                }
+    
+                // Tính toán lương nhận được
+                $luongNhanDuoc = $luongcoban + $phucap + $thuong - $khautru;
+    
+                // Cập nhật dữ liệu
+                $luongData->luongcoban = $luongcoban;
+                $luongData->phucap = $phucap;
+                $luongData->thuong = $thuong;
+                $luongData->khautru = $khautru;
+                $luongData->luongnhan = $luongNhanDuoc;
+                $luongData->thangtinhluong = now()->format('Y-m');
+                $luongData->save();
+    
+                // Trả về thông báo
+                return redirect()->route('forms/insert-salary')->with('success', 'Lương đã được tính và cập nhật thành công.');
+            } else {
+                return redirect()->route('forms/insert-salary')->with('error', 'Không có nhân viên được chọn.');
+            }
+        }
+    
+        // Trả về view
+        return view('pages/forms-layout-insert-salary', compact('nhanVien', 'luongData'));
+    }
+
+
+    // , compact('luongData', 'message') 
     public function formsLayoutV1()
     {
         return view('pages/forms-layout-v1');
@@ -267,6 +336,28 @@ class PagesController extends Controller
     {
         return view('pages/forms-select');
     }
+    public function formsSelectEmploye(Request $request)
+{
+    
+    // Kiểm tra nếu request là POST
+    if ($request->isMethod('post')) {
+        // Lấy thông tin từ form
+        $idNhanVien = $request->input('id_nhanvien');
+        $luongcoban = $request->input('luongcoban');
+        $phucap = $request->input('phucap');
+        $thuong = $request->input('thuong');
+        $khautru = $request->input('khautru');
+        
+        // Kiểm tra nếu có ID nhân viên
+}
+        // Lấy dữ liệu nhân viên (giả sử bạn có dữ liệu này để điền vào form)
+    $luongData = SalaryCaculation::all();
+    $message = null; // Không có thông báo mặc định
+
+    // Trả về view với dữ liệu nhân viên và thông báo (nếu có)
+    return view('pages/forms-select-employe', compact('luongData', 'message'));
+}
+// return view('pages/forms-select-employe', compact('luongData'));
 
     public function formsTomSelect()
     {

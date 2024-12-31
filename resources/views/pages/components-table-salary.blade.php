@@ -100,13 +100,13 @@
                     <table>
                         <tr>
                             <th>ID</th>
-                            <th>Ho va ten</th>
-                            <th>Luong co ban</th>
-                            <th>Phu cap</th>
-                            <th>Thuong</th>
-                            <th>Khau tru</th>
-                            <th>Luong nhan</th>
-                            <th>Trang thai</th>
+                            <th>Họ và tên</th>
+                            <th>Lương cơ bản</th>
+                            <th>Phụ cấp</th>
+                            <th>Thưởng</th>
+                            <th>Khấu trừ</th>
+                            <th>Lương nhận</th>
+                            <th>Trạng thái</th>
                         </tr>
                         @foreach($salaryData as $salary)
                         <tr>

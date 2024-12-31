@@ -32,7 +32,7 @@
                 />
               </svg>
             </li>
-            <li>Form Insert Salary</li>
+            <li>Form Update Salary</li>
           </ul>
         </div>
 
@@ -128,110 +128,86 @@
         <div class="grid grid-cols-12 gap-4 sm:gap-5 lg:gap-6">
           
           <div class="col-span-12 sm:col-span-8">
-          <form action="" method="post">
-            <div class="card p-4 sm:p-5">
-              <p
-                class="text-base font-medium text-slate-700 dark:text-navy-100"
-              >
-                Tinh luong
-              </p>
-              <div class="mt-4 space-y-4">
-                <label class="block">
-                  <span>Họ và tên</span>
-                  <span class="relative mt-1.5 flex">
-                    Tên nhân viên hiện ở đây
-                    
-                  </span>
-                </label>
-                <label class="block">
-                  <span>Lương cơ bản</span>
-                  <span class="relative mt-1.5 flex">
+          <form action="{{ route('forms/insert-salary') }}" method="post">
+    @csrf
+    <div class="card p-4 sm:p-5">
+        <p class="text-base font-medium text-slate-700 dark:text-navy-100">Tính lương</p>
+
+        <div class="mt-4 space-y-4">
+            <label class="block">
+                <span>Họ và tên</span>
+                <span class="relative mt-1.5 flex">
+                    {{ $nhanVien ? $nhanVien->nhanvien->hoten : 'Chưa chọn nhân viên' }}
+                </span>
+            </label>
+            <label class="block">
+                <span>Lương cơ bản</span>
+                <span class="relative mt-1.5 flex">
                     <input
-                      class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                      placeholder="Text here"
-                      type="text"
+                        name="luongcoban"
+                        class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9"
+                        placeholder="Nhập lương cơ bản"
+                        type="text"
+                        value="{{ $nhanVien ? $nhanVien->luongcoban : '' }}"
                     />
-                    
-                  </span>
-                </label>
-                <label class="block">
-                  <span>Phụ cấp</span>
-                  <span class="relative mt-1.5 flex">
+                </span>
+            </label>
+            <label class="block">
+                <span>Phụ cấp</span>
+                <span class="relative mt-1.5 flex">
                     <input
-                      class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                      placeholder="Text here"
-                      type="text"
+                        name="phucap"
+                        class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9"
+                        placeholder="Nhập phụ cấp"
+                        type="text"
+                        value="{{ $nhanVien ? $nhanVien->phucap : '' }}"
                     />
-                    
-                  </span>
-                </label>
-                <label class="block">
-                  <span>Thưởng</span>
-                  <span class="relative mt-1.5 flex">
+                </span>
+            </label>
+            <label class="block">
+                <span>Thưởng</span>
+                <span class="relative mt-1.5 flex">
                     <input
-                      class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                      placeholder="Text here"
-                      type="text"
+                        name="thuong"
+                        class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9"
+                        placeholder="Nhập thưởng"
+                        type="text"
+                        value="{{ $nhanVien ? $nhanVien->thuong : '' }}"
                     />
-                    
-                  </span>
-                </label>
-                <label class="block">
-                  <span>Khấu trừ</span>
-                  <span class="relative mt-1.5 flex">
+                </span>
+            </label>
+            <label class="block">
+                <span>Khấu trừ</span>
+                <span class="relative mt-1.5 flex">
                     <input
-                      class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                      placeholder="Text here"
-                      type="text"
+                        name="khautru"
+                        class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9"
+                        placeholder="Nhập khấu trừ"
+                        type="text"
+                        value="{{ $nhanVien ? $nhanVien->khautru : '' }}"
                     />
-                    
-                  </span>
-                </label>
-                <label class="block">
-                  <span>Lương nhận được:</span>
-                  <span class="relative mt-1.5 flex">
-                    lương nhận được= lương cơ bản + phụ cấp + thưởng - khấu trừ                    
-                  </span>
-                </label>
-                  </div>
-                </div>
-                <div class="flex justify-end space-x-2">
-                  <button
-                    class="btn space-x-2 bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                    <span>Prev</span>
-                  </button>
-                  <button
-                    class="btn space-x-2 bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90"
-                  >
-                    <span>Next</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                </form>
+                </span>
+            </label>
+            <label class="block">
+                <span>Lương nhận được:</span>
+                <span class="relative mt-1.5 flex">
+                    {{ $nhanVien ? ($nhanVien->luongcoban + $nhanVien->phucap + $nhanVien->thuong - $nhanVien->khautru) : 'Chưa tính toán' }}
+                </span>
+            </label>
+        </div>
+    </div>
+
+    <div class="flex justify-end space-x-2">
+        <button
+            class="btn space-x-2 bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50"
+            type="submit">
+            <span>Next</span>
+        </button>
+    </div>
+</form>
+Form Insert Salary
+
+
               </div>
             </div>
           </div>

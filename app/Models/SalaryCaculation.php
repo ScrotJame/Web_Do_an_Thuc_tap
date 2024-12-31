@@ -20,6 +20,10 @@ class SalaryCaculation extends Model
         'luongnhan',
         'id_trangthai',
     ];
+    public function getLuongNhanDuocAttribute()
+    {
+        return $this->luongcoban + $this->phucap + $this->thuong - $this->khautru;
+    }
     public function nhanvien()
     {
         return $this->belongsTo(AllUser::class, 'id_nhanvien', 'id_nhanvien');
