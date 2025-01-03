@@ -1,3 +1,4 @@
+{{-- http://localhost:8000/departments/create --}}
 <x-app-layout title="Form Layout v2" is-header-blur="true">
     <main class="main-content w-full px-[var(--margin-x)] pb-8">
         <div class="flex items-center space-x-4 py-5 lg:py-6">

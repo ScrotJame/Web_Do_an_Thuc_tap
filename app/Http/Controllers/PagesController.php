@@ -19,11 +19,11 @@ class PagesController extends Controller
      public function formsLayoutV2()
     {
         
-         return view('pages/forms-layout-v2Themchucvu');
+         return view('pages/forms-layout-v2Themphongban');
      }
       public function componentsTableGridjs()
      {
-         return view('pages/components-table-gridjsBangchucvu');
+         return view('pages/components-table-gridjsBangphongban');
      }
     }
 

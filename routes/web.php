@@ -3,6 +3,11 @@
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\PositionController;
+use App\Http\Controllers\ContractTypeController;
+use App\Http\Controllers\EmployeeController;
+
+
 
 
 
@@ -21,19 +26,26 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [PagesController::class, 'dashboardsCrmAnalytics'])->name('index');
 
   
-
-// Route::get('/departments/create', [DepartmentController::class, 'create'])->name('departments.create');
-// Route::post('/departments', [DepartmentController::class, 'store'])->name('departments.store');
-// Route::get('/departments/{id}/edit', [DepartmentController::class, 'edit'])->name('departments.edit');
-// Route::put('/departments/{id}', [DepartmentController::class, 'update'])->name('departments.update');
-// Route::delete('/departments/{id}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
-//     // Hiển thị form thêm phòng ban
+//phòng ban
+    Route::get('/departments', [DepartmentController::class, 'index'])->name('departments.index');
+    Route::get('/departments/create', [DepartmentController::class, 'create'])->name('departments.create');
+    Route::post('/departments', [DepartmentController::class, 'store'])->name('departments.store');
+    Route::get('/departments/{id}/edit', [DepartmentController::class, 'edit'])->name('departments.edit');
+    Route::put('/departments/{id}', [DepartmentController::class, 'update'])->name('departments.update');
+    Route::delete('/departments/{id}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
 Route::get('/departments/create', [DepartmentController::class, 'create'])->name('departments.create');
 
+// chức vụ
+Route::resource('positions', PositionController::class);
 
+// hình thức hợp đồng
 
+Route::resource('contract_types', ContractTypeController::class);
+//nhân viên
 
-
+Route::resource('employees', EmployeeController::class);
+Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
+Route::post('/employees', [EmployeeController::class, 'store'])->name('employee.store');
 
 // Lưu dữ liệu phòng ban
 Route::post('/departments', [DepartmentController::class, 'store'])->name('departments.store');

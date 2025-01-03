@@ -6,28 +6,62 @@ use App\Models\Department;
 
 class DepartmentController extends Controller
 {
-    // Hiển thị form thêm chức vụ
-    public function create()
+    // Hiển thị danh sách phòng ban
+    public function index()
     {
-        return view('pages/forms-layout-v2Themchucvu');
+        $departments = Department::paginate(10); // Phân trang
+        return view('pages.departments.index', compact('departments'));
     }
 
-    // Xử lý lưu chức vụ
+    // Hiển thị form thêm phòng ban
+    public function create()
+    {
+        return view('pages.departments.create'); // Đổi đường dẫn ở đây
+    }
+
+    // Xử lý lưu phòng ban
     public function store(Request $request)
     {
-        // Validate dữ liệu
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
         ]);
 
-        // Lưu chức vụ vào cơ sở dữ liệu
         Department::create([
             'name' => $request->name,
             'description' => $request->description,
         ]);
 
-        // Chuyển hướng với thông báo thành công
-        return redirect()->route('departments.create')->with('success', 'Department added successfully!');
+        return redirect()->route('departments.index')->with('success', 'Phòng ban đã được thêm thành công!');
+    }
+
+    // Hiển thị form chỉnh sửa phòng ban
+    public function edit($id)
+    {
+        $department = Department::findOrFail($id);
+        return view('pages.departments.edit', compact('department')); // Đổi đường dẫn ở đây
+    }
+
+    // Xử lý cập nhật phòng ban
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        $department = Department::findOrFail($id);
+        $department->update($request->only(['name', 'description']));
+
+        return redirect()->route('departments.index')->with('success', 'Phòng ban đã được cập nhật thành công!');
+    }
+
+    // Xử lý xóa phòng ban
+    public function destroy($id)
+    {
+        $department = Department::findOrFail($id);
+        $department->delete();
+
+        return redirect()->route('departments.index')->with('success', 'Phòng ban đã được xóa thành công!');
     }
 }
