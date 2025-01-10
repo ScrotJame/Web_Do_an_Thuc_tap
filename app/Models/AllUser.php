@@ -27,4 +27,8 @@ class AllUser extends Model
     {
         return $this->hasOne(SalaryCaculation::class, 'id_nhanvien');
     }
+    public function hopdong()
+    {
+        return $this->belongsTo(Hopdong::class, 'id_hinhthuchopdong', 'id_hinhthuchopdong');
+    }
 }

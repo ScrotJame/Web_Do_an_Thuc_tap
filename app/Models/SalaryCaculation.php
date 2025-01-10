@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class SalaryCaculation extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'luong'; // Tên bảng
+    protected $primaryKey = 'id_luong';
     protected $fillable = [
         'id_luong',
         'id_nhanvien',

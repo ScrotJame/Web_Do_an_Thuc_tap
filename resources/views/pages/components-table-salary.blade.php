@@ -98,29 +98,30 @@
 </style>
 
                     <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Họ và tên</th>
-                            <th>Lương cơ bản</th>
-                            <th>Phụ cấp</th>
-                            <th>Thưởng</th>
-                            <th>Khấu trừ</th>
-                            <th>Lương nhận</th>
-                            <th>Trạng thái</th>
-                        </tr>
-                        @foreach($salaryData as $salary)
-                        <tr>
-                        
-                            <td> {{ $salary['id'] }}</td>
-                            <td>   {{ $salary['title'] }}</td>
+                        <thead>
+                            <th class="bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100">ID</th>
+                            <th class="bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100">Họ và tên</th>
+                            <th class="bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100">Lương cơ bản</th>
+                            <th class="bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100">Phụ cấp</th>
+                            <th class="bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100">Thưởng</th>
+                            <th class="bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100">Khấu trừ</th>
+                            <th class="bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100">Lương nhận</th>
+                            <th class="bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100">Trạng thái</th>
+                        </thead>
+                        <tbody>
+                        @foreach($salaryData as $salary)   
+                        <tr>                      
+                            <td>{{ $salary['id'] }}</td>
+                            <td>{{ $salary['title'] }}</td>
                             <td>{{ $salary['price'] }}</td>
                             <td>{{ $salary['bonus'] }}</td>
                             <td>{{ $salary['total'] }}</td>
                             <td>{{ $salary['discountPercentage'] }}</td>
                             <td> {{ $salary['discountedPrice'] }}</td>    
-                            <td>{{$salary['trangthai']}}</td>        
-                        </tr>
+                            <td>{{$salary['trangthai']}}</td>  
+                                                          </tr>
                         @endforeach
+                    </tbody>
                     </table>
         <div x-data="{
     products: [

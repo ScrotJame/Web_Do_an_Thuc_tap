@@ -1,4 +1,4 @@
-<x-app-layout title="Form Layout v1" is-header-blur="true">
+`<x-app-layout title="Form Layout v1" is-header-blur="true">
     <main class="main-content w-full px-[var(--margin-x)] pb-8">
         <div class="flex items-center space-x-4 py-5 lg:py-6">
           <h2
@@ -126,9 +126,9 @@
         </template>
 
         <div class="grid grid-cols-12 gap-4 sm:gap-5 lg:gap-6">
-          
+
           <div class="col-span-12 sm:col-span-8">
-          <form action="{{ route('forms/insert-salary') }}" method="post">
+          <form action="{{ route('forms/update-salary', ['id_nhanvien' => request()->query('id_nhanvien')]) }}" method="post" id="salary-form" >
     @csrf
     <div class="card p-4 sm:p-5">
         <p class="text-base font-medium text-slate-700 dark:text-navy-100">Tính lương</p>
@@ -190,8 +190,8 @@
             </label>
             <label class="block">
                 <span>Lương nhận được:</span>
-                <span class="relative mt-1.5 flex">
-                    {{ $nhanVien ? ($nhanVien->luongcoban + $nhanVien->phucap + $nhanVien->thuong - $nhanVien->khautru) : 'Chưa tính toán' }}
+                <span class="relative mt-1.5 flex" id="luongnhan">
+                {{ $nhanVien ? number_format($nhanVien->luongcoban + $nhanVien->phucap + $nhanVien->thuong - $nhanVien->khautru) : '0' }} VNĐ
                 </span>
             </label>
         </div>
@@ -200,14 +200,16 @@
     <div class="flex justify-end space-x-2">
         <button
             class="btn space-x-2 bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50"
+            type="button" onclick="calculateSalary()">
+            <span>Tính</span>
+        </button>
+        <button
+            class="btn space-x-2 bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50"
             type="submit">
-            <span>Next</span>
+            <span>Cập nhật</span>
         </button>
     </div>
-</form>
-Form Insert Salary
-
-
+          </form>
               </div>
             </div>
           </div>
@@ -215,4 +217,19 @@ Form Insert Salary
           
         </div>
       </main>
+      <script>
+    function calculateSalary() {
+        const form = document.getElementById('salary-form');
+        const formData = new FormData(form);
+
+        fetch('/salary/calculate', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('luongnhan').innerText = new Intl.NumberFormat('vi-VN').format(data.luongnhan) + ' VNĐ';
+        });
+    }
+</script>
 </x-app-layout>

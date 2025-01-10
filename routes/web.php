@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AllUserController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\SalaryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,13 +66,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/components/extension-persist', [PagesController::class, 'componentsExtensionPersist'])->name('components/extension-persist');
     Route::get('/components/extension-monochrome', [PagesController::class, 'componentsExtensionMonochrome'])->name('components/extension-monochrome');
 
-    Route::get('/forms/insert-salary', [PagesController::class, 'showInsertSalaryForm'])->name('forms/insert-salary');
-    Route::post('/forms/insert-salary', [PagesController::class, 'formsLayoutInsertSalary'])->name('forms/insert-salary');
+    Route::post('/salary/calculate', [SalaryController::class, 'resultTrueSalary'])->name('forms/caculator-salary');
+    Route::post('/update-salary', [SalaryController::class, 'updateSalary'])->name('forms/update-salary');
+
+    //Route::post('/forms/insert-salary', [PagesController::class, 'formsLayoutInsertSalary'])->name('forms/insert-salary');
     Route::match(['get', 'post'], '/forms/insert-salary', [PagesController::class, 'formsLayoutInsertSalary'])->name('forms/insert-salary');
 
 
     Route::get('/forms/select-employe', [PagesController::class, 'formsSelectEmploye'])->name('forms/select-employe');
     Route::post('/forms/select-employe', [PagesController::class, 'formsSelectEmploye']);
+
+    Route::get('/forms/layout-insert-employees', [AllUserController::class, 'formsLayoutInsertEmployees'])->name('forms/layout-insert-employees');
     
     Route::get('/forms/layout-v1', [PagesController::class, 'formsLayoutV1'])->name('forms/layout-v1');
     Route::get('/forms/layout-v2', [PagesController::class, 'formsLayoutV2'])->name('forms/layout-v2');
@@ -169,3 +175,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboards/widget-ui', [PagesController::class, 'dashboardsWidgetUi'])->name('dashboards/widget-ui');
     Route::get('/dashboards/widget-contacts', [PagesController::class, 'dashboardsWidgetContacts'])->name('dashboards/widget-contacts');
 });
+// trung hieu + manh cuong 

@@ -24,7 +24,7 @@
                         Đăng nhập
                     </h2>
                     <p class="text-slate-400 dark:text-navy-300">
-                        Hãy đăng nhập để tiếp tụctục
+                        Hãy đăng nhập để tiếp tục
                     </p>
                 </div>
             </div>
@@ -100,12 +100,12 @@
                 <div class="flex space-x-4">
                     <button
                         class="btn w-full space-x-3 border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
-                        <img class="h-5.5 w-5.5" src="{{ asset('images/100x100.png') }}" alt="logo" />
+                        <img class="h-5.5 w-5.5" with="100px" height="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png" alt="logo" />
                         <span>Google</span>
                     </button>
                     <button
                         class="btn w-full space-x-3 border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
-                        <img class="h-5.5 w-5.5" src="{{ asset(path: 'images/100x100.png') }}" alt="logo" />
+                        <img class="h-5.5 w-5.5" with="100px" height="100px" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="logo" />
                         <span>Github</span>
                     </button>
                 </div>

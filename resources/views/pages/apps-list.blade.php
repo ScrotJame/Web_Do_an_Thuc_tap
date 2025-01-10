@@ -29,11 +29,10 @@
                     Chat App
                 </h2>
                 <p class="mt-1">
-                    Lineone prebuilt Messaging UI kit includes designs for social
-                    chat.
+                    Tính và cập nhật lương cho nhân viên
                 </p>
                 <div class="mt-5 pb-1">
-                    <a href="{{ route('apps/chat') }}"
+                    <a href="{{ route('forms/select-employe') }}"
                         class="border-b border-dashed border-current pb-0.5 font-medium text-primary outline-none transition-colors duration-300 hover:text-primary/70 focus:text-primary/70 dark:text-accent-light dark:hover:text-accent-light/70 dark:focus:text-accent-light/70">View
                         Application</a>
                 </div>
